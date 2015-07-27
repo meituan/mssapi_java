@@ -1,6 +1,6 @@
 # MSS(Meituan Storage Service) SDK for Java
 
-This is version 1 of the MSS SDK for Java.
+This is MSS SDK for Java.
 
 ## Installation
 
