@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.amazonaws</groupId>
-  <artifactId>aws-java-sdk-s3</artifactId>
+  <artifactId>mss-java-sdk-s3</artifactId>
   <packaging>jar</packaging>
-  <name>AWS Java SDK for Amazon S3</name>
+  <name>MSS Java SDK</name>
   <description>The AWS Java SDK for Amazon S3 module holds the client classes that is used for communicating with Amazon Simple Storage Service</description>
   <url>https://aws.amazon.com/sdkforjava</url>
 
