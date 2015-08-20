@@ -45,21 +45,21 @@ This is MSS SDK for Java。
 	import java.util.Properties;
 
 	public class AmazonS3ClientProvider {
-    		static String accessKey;
-    		static String secretKey;
-    		static String url;
+                /**
+                * <p>
+                * 创建AmazonS3Client
+                * </p>
+                *
+                *       @accessKey:mss用户的access key
+                *        secretKey:mss用户的access secret
+                *        url:mss server hostname,一般为mtmss.com
+                */
+                private static String accessKey = "*** accessKey ***";
+                private static String secretKey = "*** secretKey ***";
+                private static String url = "http://mtmss.com";
     		static AmazonS3Client s3conn;
 		
-		/**
-		* <p>
-		* 创建AmazonS3Client
-		* </p>
-		*
-		* @param accessKey:mss用户的access key
-		*	 secretKey:mss用户的access secret
-		* 	 url:mss server hostname,一般为mtmss.com
-		*/
-		public static AmazonS3 CreateAmazonS3Conn(String accessKey, String secretKey, String url)
+		public static AmazonS3 CreateAmazonS3Conn()
             		throws IOException{
 		       AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         		ClientConfiguration clientConfig = new ClientConfiguration();
@@ -99,7 +99,7 @@ This is MSS SDK for Java。
 	import com.meituan.mss.s3test.AmazonS3ClientProvider;
 	public class CreateBucket {
 		private static String newBucketName = "mss-test-bucket";
-		private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3ConnFromResource();
+		private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
 		public void testCreateBucket_NewBucketNameMatches() {
 			try {
 				Bucket bucket = s3Client.createBucket(newBucketName);
@@ -140,8 +140,8 @@ This is MSS SDK for Java。
 	public class UploadObjectSingleOperation {
 		private static String bucketName     = "*** Provide bucket name ***";
 		private static String keyName        = "*** Provide key ***";
-		private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3ConnFromResource();
-		
+                private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
+
 		public void testUploadObject() {
 			try {
             			System.out.println("Uploading a new object to S3 from a file\n");
@@ -187,7 +187,7 @@ This is MSS SDK for Java。
 	public class GetObject {
 		private static String bucketName = "*** provide bucket name ***"; 
 		private static String key        = "*** provide object key ***";
-		private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3ConnFromResource();
+		private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
 		public void getObject() {
 			try {
 				System.out.println("Downloading an object");
