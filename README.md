@@ -139,7 +139,7 @@ This is MSS SDK for Java。
         
         public class UploadObjectSingleOperation {
                 private static String bucketName     = "*** Provide bucket name ***";
-                private static String keyName        = "*** Provide key ***";
+                private static String objectName        = "*** objectName ***";
                 private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
 
                 public void testUploadObject() {
@@ -147,7 +147,7 @@ This is MSS SDK for Java。
                                 System.out.println("Uploading a new object to S3 from a file\n");
                                 File file = new File(uploadFileName);
                                 s3client.putObject(new PutObjectRequest(
-                                             bucketName, keyName, file));
+                                             bucketName, objectName, file));
 
                         } catch (AmazonServiceException ase) {
                                 System.out.println("Caught an AmazonServiceException, which " +
@@ -186,13 +186,13 @@ This is MSS SDK for Java。
         import com.meituan.mss.s3test.AmazonS3ClientProvider;
         public class GetObject {
                 private static String bucketName = "*** provide bucket name ***"; 
-                private static String key        = "*** provide object key ***";
+                private static String objectName        = "*** objectName ***";
                 private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
                 public void getObject() {
                         try {
                                 System.out.println("Downloading an object");
                                 S3Object s3object = s3Client.getObject(new GetObjectRequest(
-                                             bucketName, key));
+                                             bucketName, objectName));
                                 System.out.println("Content-Type: "  +
                                 s3object.getObjectMetadata().getContentType());
                                 InputStream objectData = s3object.getObjectContent()        
@@ -243,7 +243,7 @@ This is MSS SDK for Java。
         import java.io.*;
         public class PreSignURL {
                 private static String bucketName = "*** provide bucket name ***";
-                private static String key        = "*** provide object key ***";
+                private static String objectName        = "*** objectName ***";
                 private static AmazonS3 s3Client = AmazonS3ClientProvider.CreateAmazonS3Conn();
                 public void presigntest() {
                         try {
