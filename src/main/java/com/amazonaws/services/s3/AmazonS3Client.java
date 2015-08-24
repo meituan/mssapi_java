@@ -57,6 +57,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
+import com.amazonaws.util.Base64;
+
 import static com.amazonaws.event.SDKProgressPublisher.publishProgress;
 import static com.amazonaws.internal.ResettableInputStream.newResettableInputStream;
 import static com.amazonaws.services.s3.model.S3DataSource.Utils.cleanupDataSource;

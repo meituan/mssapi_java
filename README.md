@@ -24,7 +24,7 @@ This is MSS SDK for Java。
         	<artifactId>mss-java-sdk-s3</artifactId>
         	<version>1.9.4</version>
         </dependency>
-    注意：目前MSS SDK支持的Java版本包括Java1.7和Java1.8。
+    注意：目前MSS SDK支持的Java版本包括Java1.6，Java1.7和Java1.8。
 	
 
 ## Quick Start
