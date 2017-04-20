@@ -1439,6 +1439,15 @@ public interface AmazonS3 {
             throws AmazonClientException, AmazonServiceException;
 
     /**
+     * delete bucket force with bucket not empty
+     * add by chenghua, 2017-04-20
+     */
+    public void deleteBucketForce(DeleteBucketRequest deleteBucketRequest)
+            throws AmazonClientException, AmazonServiceException;
+    public void deleteBucketForce(String bucketName)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
      * <p>
      * Uploads a new object to the specified Amazon S3 bucket.
      * The <code>PutObjectRequest</code> contains all the
