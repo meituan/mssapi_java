@@ -964,6 +964,31 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     }
 
     /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketForce(java.lang.String)
+     */
+    public void deleteBucketForce(String bucketName)
+            throws AmazonClientException, AmazonServiceException {
+        deleteBucketForce(new DeleteBucketRequest(bucketName));
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketForce(com.amazonaws.services.s3.model.DeleteBucketRequest)
+     */
+    public void deleteBucketForce(DeleteBucketRequest deleteBucketRequest)
+            throws AmazonClientException, AmazonServiceException {
+        assertParameterNotNull(deleteBucketRequest,
+                "The DeleteBucketRequest parameter must be specified when deleting a bucket");
+
+        String bucketName = deleteBucketRequest.getBucketName();
+        assertParameterNotNull(bucketName,
+                "The bucket name parameter must be specified when deleting a bucket");
+
+        Request<DeleteBucketRequest> request = createRequest(bucketName, null, deleteBucketRequest, HttpMethodName.DELETE);
+        request.addParameter("force", null);
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+    /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#putObject(java.lang.String, java.lang.String, java.io.File)
      */
     public PutObjectResult putObject(String bucketName, String key, File file)
