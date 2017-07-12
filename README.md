@@ -195,7 +195,7 @@ This is MSS SDK for Java。
                                              bucketName, objectName));
                                 System.out.println("Content-Type: "  +
                                 s3object.getObjectMetadata().getContentType());
-                                InputStream objectData = s3object.getObjectContent()        
+                                InputStream objectData = s3object.getObjectContent();
                         } catch (AmazonServiceException ase) {
                                 System.out.println("Caught an AmazonServiceException, which" +
                                             " means your request made it " +
