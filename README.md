@@ -146,7 +146,7 @@ This is MSS SDK for Java。
                         try {
                                 System.out.println("Uploading a new object to S3 from a file\n");
                                 File file = new File(uploadFileName);
-                                s3client.putObject(new PutObjectRequest(
+                                s3Client.putObject(new PutObjectRequest(
                                              bucketName, objectName, file));
 
                         } catch (AmazonServiceException ase) {
