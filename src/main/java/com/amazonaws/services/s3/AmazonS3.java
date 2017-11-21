@@ -2336,6 +2336,55 @@ public interface AmazonS3 {
             throws AmazonClientException, AmazonServiceException;
 
     /**
+     * Gets the lifecycle configuration for the specified bucket, or null if no
+     * configuration has been established.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to retrieve lifecycle
+     *            configuration.
+     */
+    public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName);
+
+    /**
+     * Sets the lifecycle configuration for the specified bucket.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to set the lifecycle
+     *            configuration.
+     * @param bucketLifecycleConfiguration
+     *            The new lifecycle configuration for this bucket, which
+     *            completely replaces any existing configuration.
+     */
+    public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration);
+
+    /**
+     * Sets the lifecycle configuration for the specified bucket.
+     *
+     * @param setBucketLifecycleConfigurationRequest
+     *            The request object containing all options for setting the
+     *            bucket lifecycle configuration.
+     */
+    public void setBucketLifecycleConfiguration(SetBucketLifecycleConfigurationRequest setBucketLifecycleConfigurationRequest);
+
+    /**
+     * Removes the lifecycle configuration for the bucket specified.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to remove the lifecycle
+     *            configuration.
+     */
+    public void deleteBucketLifecycleConfiguration(String bucketName);
+
+    /**
+     * Removes the lifecycle configuration for the bucket specified.
+     *
+     * @param deleteBucketLifecycleConfigurationRequest
+     *            The request object containing all options for removing the
+     *            bucket lifecycle configuration.
+     */
+    public void deleteBucketLifecycleConfiguration(DeleteBucketLifecycleConfigurationRequest deleteBucketLifecycleConfigurationRequest);
+
+    /**
      * <p>
      * Returns a pre-signed URL for accessing an Amazon S3 resource.
      * </p>

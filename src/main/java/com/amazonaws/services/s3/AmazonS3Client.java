@@ -1687,6 +1687,92 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     }
 
     /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#getBucketLifecycleConfiguration(java.lang.String)
+     */
+    public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName) {
+        Request<GenericBucketRequest> request = createRequest(bucketName, null, new GenericBucketRequest(bucketName), HttpMethodName.GET);
+        request.addParameter("lifecycle", null);
+
+        try {
+            return invoke(request, new Unmarshallers.BucketLifecycleConfigurationUnmarshaller(), bucketName, null);
+        } catch (AmazonServiceException ase) {
+            switch (ase.getStatusCode()) {
+                case 404:
+                    return null;
+                default:
+                    throw ase;
+            }
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#setBucketLifecycleConfiguration(java.lang.String, com.amazonaws.services.s3.model.BucketLifecycleConfiguration)
+     */
+    public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration) {
+        setBucketLifecycleConfiguration(new SetBucketLifecycleConfigurationRequest(bucketName, bucketLifecycleConfiguration));
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#setBucketLifecycleConfiguration(com.amazonaws.services.s3.model.SetBucketLifecycleConfigurationRequest)
+     */
+    public void setBucketLifecycleConfiguration(
+            SetBucketLifecycleConfigurationRequest setBucketLifecycleConfigurationRequest) {
+        assertParameterNotNull(setBucketLifecycleConfigurationRequest,
+                "The set bucket lifecycle configuration request object must be specified.");
+
+        String bucketName = setBucketLifecycleConfigurationRequest.getBucketName();
+        BucketLifecycleConfiguration bucketLifecycleConfiguration = setBucketLifecycleConfigurationRequest.getLifecycleConfiguration();
+
+        assertParameterNotNull(bucketName,
+                "The bucket name parameter must be specified when setting bucket lifecycle configuration.");
+        assertParameterNotNull(bucketLifecycleConfiguration,
+                "The lifecycle configuration parameter must be specified when setting bucket lifecycle configuration.");
+
+        Request<SetBucketLifecycleConfigurationRequest> request = createRequest(bucketName, null, setBucketLifecycleConfigurationRequest, HttpMethodName.PUT);
+        request.addParameter("lifecycle", null);
+
+        byte[] content = new BucketConfigurationXmlFactory().convertToXmlByteArray(bucketLifecycleConfiguration);
+        request.addHeader("Content-Length", String.valueOf(content.length));
+        request.addHeader("Content-Type", "application/xml");
+        request.setContent(new ByteArrayInputStream(content));
+        try {
+            byte[] md5 = Md5Utils.computeMD5Hash(content);
+            String md5Base64 = BinaryUtils.toBase64(md5);
+            request.addHeader("Content-MD5", md5Base64);
+        } catch ( Exception e ) {
+            throw new AmazonClientException("Couldn't compute md5 sum", e);
+        }
+
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketLifecycleConfiguration(java.lang.String)
+     */
+    public void deleteBucketLifecycleConfiguration(String bucketName) {
+        deleteBucketLifecycleConfiguration(new DeleteBucketLifecycleConfigurationRequest(bucketName));
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketLifecycleConfiguration(com.amazonaws.services.s3.model.DeleteBucketLifecycleConfigurationRequest)
+     */
+    public void deleteBucketLifecycleConfiguration(
+            DeleteBucketLifecycleConfigurationRequest deleteBucketLifecycleConfigurationRequest) {
+        assertParameterNotNull(deleteBucketLifecycleConfigurationRequest,
+                "The delete bucket lifecycle configuration request object must be specified.");
+
+        String bucketName = deleteBucketLifecycleConfigurationRequest.getBucketName();
+        assertParameterNotNull(bucketName,
+                "The bucket name parameter must be specified when deleting bucket lifecycle configuration.");
+
+        Request<DeleteBucketLifecycleConfigurationRequest> request = createRequest(bucketName, null, deleteBucketLifecycleConfigurationRequest, HttpMethodName.DELETE);
+        request.addParameter("lifecycle", null);
+
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+
+    /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#generatePresignedUrl(java.lang.String, java.lang.String, java.util.Date)
      */
     public URL generatePresignedUrl(String bucketName, String key, Date expiration)

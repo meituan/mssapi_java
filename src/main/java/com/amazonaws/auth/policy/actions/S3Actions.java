@@ -208,6 +208,26 @@ public enum S3Actions implements Action {
     DeleteBucketPolicy("s3:DeleteBucketPolicy"),
 
     /**
+     * Action for getting the bucket lifecycle configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketLifecycleConfiguration(String)
+     */
+    GetBucketLifecycleConfiguration("s3:GetLifecycleConfiguration"),
+
+    /**
+     * Action for setting the bucket lifecycle configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketLifecycleConfiguration(com.amazonaws.services.s3.model.SetBucketLifecycleConfigurationRequest)
+     */
+    SetBucketLifecycleConfiguration("s3:PutLifecycleConfiguration"),
+
+    /**
      * Action for getting the bucket logging configuration for an Amazon S3
      * bucket.
      * <p>
