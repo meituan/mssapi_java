@@ -228,6 +228,36 @@ public enum S3Actions implements Action {
     SetBucketLifecycleConfiguration("s3:PutLifecycleConfiguration"),
 
     /**
+     * Action for getting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketWebsiteConfiguration(com.amazonaws.services.s3.model.GetBucketWebsiteConfigurationRequest)
+     */
+    GetBucketWebsiteConfiguration("s3:GetBucketWebsite"),
+
+    /**
+     * Action for setting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketWebsiteConfiguration(com.amazonaws.services.s3.model.SetBucketWebsiteConfigurationRequest)
+     */
+    SetBucketWebsiteConfiguration("s3:PutBucketWebsite"),
+
+    /**
+     * Action for deleting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#deleteBucketWebsiteConfiguration(com.amazonaws.services.s3.model.DeleteBucketWebsiteConfigurationRequest)
+     */
+    DeleteBucketWebsiteConfiguration("s3:DeleteBucketWebsite"),
+
+    /**
      * Action for getting the bucket logging configuration for an Amazon S3
      * bucket.
      * <p>
