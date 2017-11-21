@@ -2604,6 +2604,36 @@ public interface AmazonS3 {
             throws AmazonClientException, AmazonServiceException;
 
     /**
+     * Lists in-progress multipart uploads. An in-progress multipart upload is a
+     * multipart upload that has been initiated, using the
+     * InitiateMultipartUpload request, but has not yet been completed or
+     * aborted.
+     * <p>
+     * This operation returns at most 1,000 multipart uploads in the response by
+     * default. The number of multipart uploads can be further limited using the
+     * MaxUploads property on the request parameter. If there are additional
+     * multipart uploads that satisfy the list criteria, the response will
+     * contain an IsTruncated property with the value set to true. To list the
+     * additional multipart uploads use the KeyMarker and UploadIdMarker
+     * properties on the request parameters.
+     *
+     * @param request
+     *            The ListMultipartUploadsRequest object that specifies all the
+     *            parameters of this operation.
+     *
+     * @return A MultipartUploadListing from Amazon S3.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     */
+    public MultipartUploadListing listMultipartUploads(ListMultipartUploadsRequest request)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
      * <p>
      * Returns a pre-signed URL for accessing an Amazon S3 resource.
      * </p>
