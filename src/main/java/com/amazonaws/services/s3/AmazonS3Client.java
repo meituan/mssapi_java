@@ -1579,6 +1579,114 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     }
 
     /* (non-Javadoc)
+          * @see com.amazonaws.services.s3.AmazonS3#getBucketPolicy(java.lang.String)
+          */
+    public BucketPolicy getBucketPolicy(String bucketName)
+            throws AmazonClientException, AmazonServiceException {
+        return getBucketPolicy(new GetBucketPolicyRequest(bucketName));
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#setBucketPolicy(java.lang.String, java.lang.String)
+     */
+    public void setBucketPolicy(String bucketName, String policyText)
+            throws AmazonClientException, AmazonServiceException {
+        assertParameterNotNull(bucketName,
+                "The bucket name must be specified when setting a bucket policy");
+        assertParameterNotNull(policyText,
+                "The policy text must be specified when setting a bucket policy");
+
+        Request<GenericBucketRequest> request = createRequest(bucketName, null, new GenericBucketRequest(bucketName), HttpMethodName.PUT);
+        request.addParameter("policy", null);
+        request.setContent(new ByteArrayInputStream(ServiceUtils.toByteArray(policyText)));
+
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketPolicy(java.lang.String)
+     */
+    public void deleteBucketPolicy(String bucketName)
+            throws AmazonClientException, AmazonServiceException {
+        deleteBucketPolicy(new DeleteBucketPolicyRequest(bucketName));
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#getBucketPolicy(com.amazonaws.services.s3.model.GetBucketPolicyRequest)
+     */
+    public BucketPolicy getBucketPolicy(
+            GetBucketPolicyRequest getBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException {
+        assertParameterNotNull(getBucketPolicyRequest,
+                "The request object must be specified when getting a bucket policy");
+
+        String bucketName = getBucketPolicyRequest.getBucketName();
+        assertParameterNotNull(bucketName,
+                "The bucket name must be specified when getting a bucket policy");
+
+        Request<GetBucketPolicyRequest> request = createRequest(bucketName, null, getBucketPolicyRequest, HttpMethodName.GET);
+        request.addParameter("policy", null);
+
+        BucketPolicy result = new BucketPolicy();
+        try {
+            String policyText = invoke(request, new S3StringResponseHandler(), bucketName, null);
+            result.setPolicyText(policyText);
+            return result;
+        } catch (AmazonServiceException ase) {
+	            /*
+	             * If we receive an error response telling us that no policy has
+	             * been set for this bucket, then instead of forcing the user to
+	             * deal with the exception, we'll just return an empty result. Any
+	             * other exceptions will be rethrown for the user to handle.
+	             */
+            if (ase.getErrorCode().equals("NoSuchBucketPolicy")) return result;
+            throw ase;
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#setBucketPolicy(com.amazonaws.services.s3.model.SetBucketPolicyRequest)
+     */
+    public void setBucketPolicy(SetBucketPolicyRequest setBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException {
+        assertParameterNotNull(setBucketPolicyRequest,
+                "The request object must be specified when setting a bucket policy");
+
+        String bucketName = setBucketPolicyRequest.getBucketName();
+        String policyText = setBucketPolicyRequest.getPolicyText();
+
+        assertParameterNotNull(bucketName,
+                "The bucket name must be specified when setting a bucket policy");
+        assertParameterNotNull(policyText,
+                "The policy text must be specified when setting a bucket policy");
+
+        Request<SetBucketPolicyRequest> request = createRequest(bucketName, null, setBucketPolicyRequest, HttpMethodName.PUT);
+        request.addParameter("policy", null);
+        request.setContent(new ByteArrayInputStream(ServiceUtils.toByteArray(policyText)));
+
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+    /* (non-Javadoc)
+     * @see com.amazonaws.services.s3.AmazonS3#deleteBucketPolicy(com.amazonaws.services.s3.model.DeleteBucketPolicyRequest)
+     */
+    public void deleteBucketPolicy(
+            DeleteBucketPolicyRequest deleteBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException {
+        assertParameterNotNull(deleteBucketPolicyRequest,
+                "The request object must be specified when deleting a bucket policy");
+
+        String bucketName = deleteBucketPolicyRequest.getBucketName();
+        assertParameterNotNull(bucketName,
+                "The bucket name must be specified when deleting a bucket policy");
+
+        Request<DeleteBucketPolicyRequest> request = createRequest(bucketName, null, deleteBucketPolicyRequest, HttpMethodName.DELETE);
+        request.addParameter("policy", null);
+
+        invoke(request, voidResponseHandler, bucketName, null);
+    }
+
+    /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#generatePresignedUrl(java.lang.String, java.lang.String, java.util.Date)
      */
     public URL generatePresignedUrl(String bucketName, String key, Date expiration)

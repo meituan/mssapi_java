@@ -181,6 +181,33 @@ public enum S3Actions implements Action {
     GetBucketVersioningConfiguration("s3:GetBucketVersioning"),
 
     /**
+     * Action for retrieving the access control policy for an Amazon S3 bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketPolicy(String)
+     */
+    GetBucketPolicy("s3:GetBucketPolicy"),
+
+    /**
+     * Action for setting the access control policy for an Amazon S3 bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketPolicy(String, String)
+     */
+    SetBucketPolicy("s3:PutBucketPolicy"),
+
+    /**
+     * Action for deleting the access control policy for an Amazon S3 Bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#deleteBucketPolicy(com.amazonaws.services.s3.model.DeleteBucketPolicyRequest)
+     */
+    DeleteBucketPolicy("s3:DeleteBucketPolicy"),
+
+    /**
      * Action for getting the bucket logging configuration for an Amazon S3
      * bucket.
      * <p>

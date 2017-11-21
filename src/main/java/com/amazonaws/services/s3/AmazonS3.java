@@ -2142,6 +2142,201 @@ public interface AmazonS3 {
 
     /**
      * <p>
+     * Gets the policy for the specified bucket. Only the owner of the
+     * bucket can retrieve the policy. If no policy has been set for the bucket,
+     * then an empty result object with a <code>null</code> policy text field will be
+     * returned.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param bucketName
+     *            The name of the Amazon S3 bucket whose policy is being
+     *            retrieved.
+     *
+     * @return The Amazon S3 bucket policy for the specified bucket.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     *
+     * @see AmazonS3#setBucketPolicy(String, String)
+     */
+    public BucketPolicy getBucketPolicy(String bucketName)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
+     * Gets the policy for the specified bucket. Only the owner of the bucket
+     * can retrieve the policy. If no policy has been set for the bucket, then
+     * an empty result object with a <code>null</code> policy text field will be
+     * returned.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param getBucketPolicyRequest
+     *            The request object containing all of the details for
+     *            retreiving a bucket's policy.
+     *
+     * @return The Amazon S3 bucket policy for the specified bucket.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     *
+     * @see AmazonS3#setBucketPolicy(String, String)
+     */
+    public BucketPolicy getBucketPolicy(GetBucketPolicyRequest getBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
+     * Sets the policy associated with the specified bucket. Only the owner of
+     * the bucket can set a bucket policy. If a policy already exists for the
+     * specified bucket, the new policy replaces the existing policy.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param bucketName
+     *            The name of the Amazon S3 bucket whose policy is being set.
+     * @param policyText
+     *            The policy to apply to the specified bucket.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     */
+    public void setBucketPolicy(String bucketName, String policyText)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
+     * Sets the policy associated with the specified bucket. Only the owner of
+     * the bucket can set a bucket policy. If a policy already exists for the
+     * specified bucket, the new policy replaces the existing policy.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param setBucketPolicyRequest
+     *            The request object containing the details of the bucket and
+     *            policy to update.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     */
+    public void setBucketPolicy(SetBucketPolicyRequest setBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
+     * Deletes the policy associated with the specified bucket. Only the owner
+     * of the bucket can delete the bucket policy.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param bucketName
+     *            The name of the Amazon S3 bucket whose policy is being
+     *            deleted.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     */
+    public void deleteBucketPolicy(String bucketName)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
+     * Deletes the policy associated with the specified bucket. Only the owner
+     * of the bucket can delete the bucket policy.
+     * </p>
+     * <p>
+     * Bucket policies provide access control management at the bucket level for
+     * both the bucket resource and contained object resources. Only one policy
+     * can be specified per-bucket.
+     * </p>
+     * <p>
+     * See the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">
+     * Amazon S3 developer guide</a> for more information on forming bucket
+     * polices.
+     * </p>
+     *
+     * @param deleteBucketPolicyRequest
+     *            The request object containing all the details for deleting a
+     *            bucket's policy.
+     *
+     * @throws AmazonClientException
+     *             If any errors are encountered in the client while making the
+     *             request or handling the response.
+     * @throws AmazonServiceException
+     *             If any errors occurred in Amazon S3 while processing the
+     *             request.
+     */
+    public void deleteBucketPolicy(DeleteBucketPolicyRequest deleteBucketPolicyRequest)
+            throws AmazonClientException, AmazonServiceException;
+
+    /**
+     * <p>
      * Returns a pre-signed URL for accessing an Amazon S3 resource.
      * </p>
      * <p>
