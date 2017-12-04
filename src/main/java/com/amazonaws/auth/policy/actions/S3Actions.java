@@ -208,6 +208,26 @@ public enum S3Actions implements Action {
     DeleteBucketPolicy("s3:DeleteBucketPolicy"),
 
     /**
+     * Action for getting the Cross origin configuration configuration
+     * information set for the bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketCrossOriginConfiguration(String)
+     */
+    GetBucketCrossOriginConfiguration("s3:GetBucketCORS"),
+
+    /**
+     * Action for setting the Cross origin configuration configuration
+     * information set for the bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketCrossOriginConfiguration(com.amazonaws.services.s3.model.SetBucketCrossOriginConfigurationRequest)
+     */
+    SetBucketCrossOriginConfiguration("s3:PutBucketCORS"),
+
+    /**
      * Action for getting the bucket lifecycle configuration for an Amazon S3
      * bucket.
      * <p>

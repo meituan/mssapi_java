@@ -2633,6 +2633,56 @@ public interface AmazonS3 {
     public MultipartUploadListing listMultipartUploads(ListMultipartUploadsRequest request)
             throws AmazonClientException, AmazonServiceException;
 
+
+    /**
+     * Gets the cross origin configuration for the specified bucket, or null if no
+     * configuration has been established.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to retrieve cross origin
+     *            configuration.
+     */
+    public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(String bucketName);
+
+    /**
+     * Sets the cross origin configuration for the specified bucket.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to retrieve cross origin
+     *            configuration.
+     * @param bucketCrossOriginConfiguration
+     * 			  The new cross origin configuration for this bucket, which
+     *            completely replaces any existing configuration.
+     */
+    public void setBucketCrossOriginConfiguration(String bucketName, BucketCrossOriginConfiguration bucketCrossOriginConfiguration);
+
+    /**
+     * Sets the cross origin configuration for the specified bucket.
+     *
+     * @param setBucketCrossOriginConfigurationRequest
+     *            The request object containing all options for setting the
+     *            bucket cross origin configuration.
+     */
+    public void setBucketCrossOriginConfiguration(SetBucketCrossOriginConfigurationRequest setBucketCrossOriginConfigurationRequest);
+
+    /**
+     * Delete the cross origin configuration for the specified bucket.
+     *
+     * @param bucketName
+     *            The name of the bucket for which to retrieve cross origin
+     *            configuration.
+     */
+    public void deleteBucketCrossOriginConfiguration(String bucketName);
+
+    /**
+     * Delete the cross origin configuration for the specified bucket.
+     *
+     * @param deleteBucketCrossOriginConfigurationRequest
+     *            The request object containing all options for deleting the
+     *            bucket cross origin configuration.
+     */
+    public void deleteBucketCrossOriginConfiguration(DeleteBucketCrossOriginConfigurationRequest deleteBucketCrossOriginConfigurationRequest);
+
     /**
      * <p>
      * Returns a pre-signed URL for accessing an Amazon S3 resource.
