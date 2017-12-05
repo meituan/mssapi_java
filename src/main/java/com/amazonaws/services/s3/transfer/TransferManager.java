@@ -1067,6 +1067,42 @@ public class TransferManager {
     }
 
     /**
+     * <p>
+     * Aborts any multipart uploads that were initiated before the specified date.
+     * </p>
+     * <p>
+     * This method is useful for cleaning up any interrupted multipart uploads.
+     * <code>TransferManager</code> attempts to abort any failed uploads,
+     * but in some cases this may not be possible, such as if network connectivity
+     * is completely lost.
+     * </p>
+     *
+     * @param bucketName
+     *            The name of the bucket containing the multipart uploads to
+     *            abort.
+     * @param date
+     *            The date indicating which multipart uploads should be aborted.
+     */
+    public void abortMultipartUploads(String bucketName, Date date)
+            throws AmazonServiceException, AmazonClientException {
+        MultipartUploadListing uploadListing = s3.listMultipartUploads(appendSingleObjectUserAgent(
+                new ListMultipartUploadsRequest(bucketName)));
+        do {
+            for (MultipartUpload upload : uploadListing.getMultipartUploads()) {
+                if (upload.getInitiated().compareTo(date) < 0) {
+                    s3.abortMultipartUpload(appendSingleObjectUserAgent(new AbortMultipartUploadRequest(
+                            bucketName, upload.getKey(), upload.getUploadId())));
+                }
+            }
+
+            ListMultipartUploadsRequest request = new ListMultipartUploadsRequest(bucketName)
+                    .withUploadIdMarker(uploadListing.getNextUploadIdMarker())
+                    .withKeyMarker(uploadListing.getNextKeyMarker());
+            uploadListing = s3.listMultipartUploads(appendSingleObjectUserAgent(request));
+        } while (uploadListing.isTruncated());
+    }
+
+    /**
      * Forcefully shuts down this TransferManager instance - currently executing
      * transfers will not be allowed to finish. It also by default shuts down
      * the underlying Amazon S3 client.

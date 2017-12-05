@@ -181,6 +181,103 @@ public enum S3Actions implements Action {
     GetBucketVersioningConfiguration("s3:GetBucketVersioning"),
 
     /**
+     * Action for retrieving the access control policy for an Amazon S3 bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketPolicy(String)
+     */
+    GetBucketPolicy("s3:GetBucketPolicy"),
+
+    /**
+     * Action for setting the access control policy for an Amazon S3 bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketPolicy(String, String)
+     */
+    SetBucketPolicy("s3:PutBucketPolicy"),
+
+    /**
+     * Action for deleting the access control policy for an Amazon S3 Bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#deleteBucketPolicy(com.amazonaws.services.s3.model.DeleteBucketPolicyRequest)
+     */
+    DeleteBucketPolicy("s3:DeleteBucketPolicy"),
+
+    /**
+     * Action for getting the Cross origin configuration configuration
+     * information set for the bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketCrossOriginConfiguration(String)
+     */
+    GetBucketCrossOriginConfiguration("s3:GetBucketCORS"),
+
+    /**
+     * Action for setting the Cross origin configuration configuration
+     * information set for the bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketCrossOriginConfiguration(com.amazonaws.services.s3.model.SetBucketCrossOriginConfigurationRequest)
+     */
+    SetBucketCrossOriginConfiguration("s3:PutBucketCORS"),
+
+    /**
+     * Action for getting the bucket lifecycle configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketLifecycleConfiguration(String)
+     */
+    GetBucketLifecycleConfiguration("s3:GetLifecycleConfiguration"),
+
+    /**
+     * Action for setting the bucket lifecycle configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketLifecycleConfiguration(com.amazonaws.services.s3.model.SetBucketLifecycleConfigurationRequest)
+     */
+    SetBucketLifecycleConfiguration("s3:PutLifecycleConfiguration"),
+
+    /**
+     * Action for getting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#getBucketWebsiteConfiguration(com.amazonaws.services.s3.model.GetBucketWebsiteConfigurationRequest)
+     */
+    GetBucketWebsiteConfiguration("s3:GetBucketWebsite"),
+
+    /**
+     * Action for setting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#setBucketWebsiteConfiguration(com.amazonaws.services.s3.model.SetBucketWebsiteConfigurationRequest)
+     */
+    SetBucketWebsiteConfiguration("s3:PutBucketWebsite"),
+
+    /**
+     * Action for deleting the bucket website configuration for an Amazon S3
+     * bucket.
+     * <p>
+     * Valid for use with {@link S3BucketResource} resources.
+     *
+     * @see AmazonS3#deleteBucketWebsiteConfiguration(com.amazonaws.services.s3.model.DeleteBucketWebsiteConfigurationRequest)
+     */
+    DeleteBucketWebsiteConfiguration("s3:DeleteBucketWebsite"),
+
+    /**
      * Action for getting the bucket logging configuration for an Amazon S3
      * bucket.
      * <p>
